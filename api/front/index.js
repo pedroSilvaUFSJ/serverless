@@ -7,7 +7,10 @@ imageForm.addEventListener("submit", async event => {
     const { url } = await fetch("s3Url").then(res => res.json())
     await fetch(url, {
         method: "PUT",
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+            "Content-Type": "multipart/form-data",
+            "Access-Control-Allow-Origin": '*',
+        },
         body: file
     })
     const imageUrl = url.split('?')[0]

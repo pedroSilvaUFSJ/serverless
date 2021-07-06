@@ -27,6 +27,47 @@ npm run deploy
 ## Usage
 To test the application, after running the API and deploying the serverless, you can go to http://localhost:8080 and upload the image.
 
+### AWS Settings
+In order to get the amazon bucket set, don't forget to include the bucket policy and Cross-origin resource sharing.
+Have a look at these examples:
+#### Bucket policy
+```json
+{
+    "Version": "2012-10-17",
+    "Id": "Policy1625566935522",
+    "Statement": [
+        {
+            "Sid": "Stmt1625566932039",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::<BUCKET NAME>/*"
+        }
+    ]
+}
+```
+
+#### Cross-origin resource sharing (CORS)
+```json
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "PUT",
+            "HEAD",
+            "GET"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": []
+    }
+]
+```
+
+
 ### BEER-WARE LICENSE
   > `pedro.ufsj@gmail.com` wrote this file. As long as you retain this notice you
   can do whatever you want with this stuff. If we meet some day, and you think
