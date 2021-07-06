@@ -1,0 +1,34 @@
+jobs:
+  test:
+    working_directory: ~/nodejs-serverless-jest
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            # Find a cache corresponding to this specific package-lock.json checksum
+            # when this file is changed, this key will fail
+            - v1-npm-deps-{{ checksum "package-lock.json" }}
+            # Find the most recently generated cache used from any branch
+            - v1-npm-deps-
+      - run: npm install
+      - save_cache:
+        paths:
+          - ~/usr/local/lib/node_modules  # location depends on npm version
+        key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run:
+          name: Jest
+          command: |
+            mkdir -p test-results/jest
+            npm run test
+          environment:
+            JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
+      - store_test_results:
+          path: test-results
+
+workflows:
+  version: 2
+  unit-tests:
+    jobs:
+      - test

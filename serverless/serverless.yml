@@ -1,0 +1,33 @@
+service: "upload-to-s3-and-postprocess"
+app: first-app
+frameworkVersion: "2"
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-south-1
+  lambdaHashingVersion: 20201221
+  memorySize: 256
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "s3:*"
+          Resource:
+            - "arn:aws:s3:::*"
+functions:
+  imageProcess:
+    handler: image.handle
+    environment:
+      bucket: serverless
+    events:
+      - s3:
+          bucket: pedro-bucket-serverless
+          event: s3:ObjectCreated:*
+          rules:
+            - suffix: .jpg
+      - s3:
+          bucket: pedro-bucket-serverless
+          event: s3:ObjectCreated:*
+          rules:
+            - suffix: .png

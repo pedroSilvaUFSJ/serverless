@@ -1,0 +1,16 @@
+{
+  "name": "upload-image",
+  "version": "1.0.0",
+  "description": "",
+  "main": "optimize.js",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  },
+  "scripts": {
+    "deploy": "serverless deploy -v",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
