@@ -17,15 +17,10 @@ provider:
             - "arn:aws:s3:::*"
 functions:
   imageProcess:
-    handler: image.handle
+    handler: imageFunction.handle
     environment:
-      bucket: serverless
+      bucket: pedro-bucket-serverless
     events:
-      - s3:
-          bucket: pedro-bucket-serverless
-          event: s3:ObjectCreated:*
-          rules:
-            - suffix: .jpg
       - s3:
           bucket: pedro-bucket-serverless
           event: s3:ObjectCreated:*

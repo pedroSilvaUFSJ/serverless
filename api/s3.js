@@ -15,7 +15,7 @@ const s3 = new aws.S3(s3Object);
 module.exports.generateploadUrl = async function () {
     const rawBytes = await crypto.randomBytes(16);
     const imageName = rawBytes.toString('hex');
-    const params = { Bucket, Key: imageName, Expires: 60 };
+    const params = { Bucket, Key: `${imageName}.png`, Expires: 60 };
     const uploadURL = await s3.getSignedUrlPromise('putObject', params);
     return uploadURL;
 }

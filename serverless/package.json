@@ -2,7 +2,7 @@
   "name": "upload-image",
   "version": "1.0.0",
   "description": "",
-  "main": "optimize.js",
+  "main": "imageFunction.js",
   "devDependencies": {
     "jest": "^27.0.6"
   },
